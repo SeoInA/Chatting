@@ -31,7 +31,7 @@
 			<span> 목록 </span>
 		</div>
 		<div class="col-8" style="float: left; text-align: center;">
-			${tutor_name} 님과 대화</div>
+		상대방 님과 대화</div>
 		<div class="col-2" style="float: right">
 			<span> 닫기 </span>
 		</div>
