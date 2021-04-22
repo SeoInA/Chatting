@@ -1,38 +1,62 @@
 package com.ina.message.VO;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserVO {
-	private String user_id;
+	private int id;
 	private String name;
-	private int unReadCount;
-	
+	private String email;
+	private String nickName;
+	private String password;
+	private int isDelete;
+	private Timestamp regDate;
 	@Override
 	public String toString() {
-		return "UserVO [user_id=" + user_id + ", name=" + name + ", unReadCount=" + unReadCount + "]";
+		return "UserVO [id=" + id + ", name=" + name + ", email=" + email + ", nickName=" + nickName + ", password="
+				+ password + ", isDelete=" + isDelete + ", regDate=" + regDate + "]";
 	}
-
-	public String getUser_id() {
-		return user_id;
+	public int getId() {
+		return id;
 	}
-
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setId(int id) {
+		this.id = id;
 	}
-
 	public String getName() {
 		return name;
 	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public int getUnReadCount() {
-		return unReadCount;
+	public String getEmail() {
+		return email;
 	}
-
-	public void setUnReadCount(int unReadCount) {
-		this.unReadCount = unReadCount;
+	public void setEmail(String email) {
+		this.email = email;
 	}
+	public String getNickName() {
+		return nickName;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public int getIsDelete() {
+		return isDelete;
+	}
+	public void setIsDelete(int isDelete) {
+		this.isDelete = isDelete;
+	}
+	public Timestamp getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Timestamp regDate) {
+		this.regDate = regDate;
+	}
+	
 }

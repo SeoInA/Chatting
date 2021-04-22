@@ -79,4 +79,72 @@ select count(*) from MESSAGE where TUTOR_USER_user_id =#{TUTOR_USER_user_id} and
 SELECT count(*) FROM chat WHERE (receiver_id = #{receiver_id} AND readTime = sendTime AND sender != #{sender_id}) OR (sender_id = #{sender_id} AND readTime = sendTime AND sender != #{sender_id}); 
 
 </select>
+
+<!-- version2 -->
+<select id="countByChatId" resultType="int">
+    	SELECT COUNT(*)
+    	FROM chatRoom
+    	WHERE sender_id = #{sender_id} AND
+    	receiver_id = #{receiver_id};
+ </select>
+ <select id="findByChatId" resultType="com.ina.message.VO.ChatRoomVO">
+    	SELECT *
+    	FROM chatRoom
+    	WHERE sender_id = #{sender_id} AND
+    	receiver_id = #{receiver_id};
+ </select>
+ <insert id="addChatRoom" parameterType="com.ina.message.VO.ChatRoomVO"
+    	useGeneratedKeys="true" keyProperty="id">
+    	INSERT INTO 
+    	chatRoom(sender_id, receiver_id, fileName, senderName, receiverName)
+    	VALUES (#{sender_id}, #{receiver_id}, #{fileName},#{senderName}, #{receiverName});
+ </insert>
+ <select id="getRoomId" resultType="int">
+    	SELECT ID
+    	FROM chatRoom
+    	WHERE sender_id = #{sender_id} AND
+    	receiver_id = #{receiver_id};
+ </select>
+ 
+  <update id="updateFileName">
+    	UPDATE chatRoom
+    	SET fileName = #{fileName}
+    	WHERE id = #{id};
+    </update>
+   
+    <update id="updateChatReadBuy">
+    	UPDATE chatRoom
+    	SET chatReadSend = #{chatReadBuy}
+    	WHERE id = #{id};
+    </update>
+
+    <update id="updateChatReadSell">
+    	UPDATE chatRoom
+    	SET chatReadRec = #{chatReadSell}
+    	WHERE id = #{id};
+    </update>
+   
+   <select id="getUnreadMessages" resultType="int">
+   		SELECT COUNT(id)
+   		FROM chatRoom
+   		WHERE (receiver_id = #{email} AND chatReadRec = 0) OR 
+   		(BUYERID = #{email} AND chatReadSend = 0);
+   </select>
+
+   <select id="getUnreadChatRoom" resultType="int">
+   		SELECT id
+   		FROM chatRoom
+   		WHERE (receiver_id = #{email} AND chatReadRec = 0) OR 
+   		(BUYERID = #{email} AND chatReadSend = 0);
+   </select>
+
+<!-- userList불러오기 -->
+<select id="userList" resultType="com.ina.message.VO.UserVO">
+	SELECT * FROM user WHERE isDelete=0;
+</select>
+
+<!-- id로 이름 가져오기 -->
+<select id="getNameByID" resultType="String">
+	SELECT name FROM user WHERE id=#{id}
+</select>
 </mapper>

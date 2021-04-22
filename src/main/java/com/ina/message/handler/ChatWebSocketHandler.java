@@ -25,6 +25,7 @@ import com.ina.message.VO.UserVO;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler {
 
+	/*
 	@Inject
 	private ChatDAO dao;
 
@@ -135,6 +136,6 @@ public class ChatWebSocketHandler extends TextWebSocketHandler {
 
 		System.out.println(new Date() + " : " + logmsg);
 
-	}
+	}*/
 
 }
