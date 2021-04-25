@@ -11,7 +11,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User List </title>
-
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <style>
 	.table tbodies {width:60%;}
 	.table thead {background-color: #d69fa9;}
@@ -46,10 +46,10 @@
 <tbody class="tbodies">
 <c:forEach items="${list}" var="u">
 	<tr>
-		<td>${u.id}</td> 
-		<td>${u.name}</td>
+		<td>${u.userid}</td> 
+		<td id="userName">${u.username}</td>
 		<td>
-			<button type='button' class='btn mb-md-0 mb-2 btn-outline iconButton' onClick = "location.href='<%=request.getContextPath()%>/chatMessage/${u.id}'"><span class='tooltiptext'>쪽지</span></button>
+			<a href="#" onclick="return onChat(${u.userid},'${u.username}');">채팅하기 </a>
  		</td>
 	</tr>
 </c:forEach>
@@ -60,6 +60,44 @@
 </div>
 
 </main>
-
+<jsp:include page="/WEB-INF/views/talk.jsp" />
 </body>
+<script>
+
+	//채팅 하기 (방 만들기 또는 불러오기)
+		function onChat(id,name){
+			if("${sessionScope.ID}" != id){
+			$.ajax({
+				url:"createChat.do",
+				data:{
+					userName:"${sessionScope.Name}",
+					userId:"${sessionScope.ID}",
+					receiverId:id
+				},
+				type:"post",
+				success:function(data){
+					// 채팅방이 닫혀있고, 채팅 리스트가 닫혀있다면
+		            if($('.chatContainer').hasClass("display-none") && $('.chatListContainer').hasClass('display-none')){
+		            	// 리스트를 연다
+		                $('.chatListContainer').toggleClass('display-none');
+		             	// 채팅 방 목록을 불러온다.
+		                getRoomList();		
+		                // 해당 채팅 방으로 들어간다.
+		                $('.userNameId:contains('+name+')').parent().trigger("click");
+		            }
+					// 채팅 리스트가 열려 있다면
+		            else if(!$('.chatListContainer').hasClass('display-none')){
+		                // 해당 채팅 방으로 들어간다.
+		                $('.userNameId:contains('+name+')').parent().trigger("click");
+		            }
+		            else{
+		            	alert("이미 채팅방이 열려 있습니다.");
+		            }
+				}
+			});
+			
+            return false;
+			}
+		}
+	</script>
 </html>

@@ -1,5 +1,5 @@
 package com.ina.message.DAO;
-
+import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,6 +19,7 @@ public class LoginDAO {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("userid", userid);
 		paramMap.put("userpw", userpw);
+		System.out.println(paramMap);
 		
 		return sqlSession.selectOne(namespace+".login", paramMap);
 	}
@@ -27,5 +28,12 @@ public class LoginDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne(namespace+".checkOverId",user_id);
 	}
+	
+	public UserVO getUserInfo(int id) throws Exception{
+		return sqlSession.selectOne(namespace+".getUserInfo",id);
+	}
 
+	public List<UserVO> userList() throws Exception{
+		return sqlSession.selectList(namespace+".userList");
+	}
 }

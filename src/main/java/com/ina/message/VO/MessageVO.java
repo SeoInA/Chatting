@@ -6,112 +6,91 @@ import com.google.gson.Gson;
 
 public class MessageVO {
 	
-	private String message_id;
-	private String sender;
-	private String receiver;
-	private String content;
-	private Date sendTime;
-	private Date readTime;
-	private String chatroom_id;
-	private String sender_id;
-	private String receiver_id;
-//	private String user_profileImagePath;
-//	private String receiver_user_profileImagePath;
+		private int id; //메시지 번호
+	 	private int roomId;			// 방 번호
+	    private String message;			// 메세지 내용
+	    private String name;			// 보낸이 이름
+	    private int userId;			// 보낸이 이메일
+	    private int unReadCount;		// 안 읽은 메세지 수
+	    private int sessionCount;		// 현재 세션 수
+		
+	    public MessageVO() {
+			super();
+		}
 
-	private int unReadCount;
+		public MessageVO(int id,int roomId, String message, String name, int userId, int unReadCount,
+				int sessionCount) {
+			super();
+			this.id=id;
+			this.roomId = roomId;
+			this.message = message;
+			this.name = name;
+			this.userId = userId;
+			this.unReadCount = unReadCount;
+			this.sessionCount = sessionCount;
+		}
 
-	@Override
-	public String toString() {
-		return "MessageVO [message_id=" + message_id + ", sender=" + sender + ", receiver=" + receiver + ", content="
-				+ content + ", sendTime=" + sendTime + ", readTime=" + readTime + ", chatroom_id=" + chatroom_id
-				+ ", sender_id=" + sender_id + ", receiver_id=" + receiver_id + ", unReadCount=" + unReadCount + "]";
-	}
+		public int getId() {
+			return id;
+		}
 
-	public String getMessage_id() {
-		return message_id;
-	}
+		public void setId(int id) {
+			this.id = id;
+		}
 
-	public void setMessage_id(String message_id) {
-		this.message_id = message_id;
-	}
+		public int getRoomId() {
+			return roomId;
+		}
 
-	public String getSender() {
-		return sender;
-	}
+		public void setRoomId(int roomId) {
+			this.roomId = roomId;
+		}
 
-	public void setSender(String sender) {
-		this.sender = sender;
-	}
+		public int getUserId() {
+			return userId;
+		}
 
-	public String getReceiver() {
-		return receiver;
-	}
+		public void setUserId(int userId) {
+			this.userId = userId;
+		}
 
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
+		public String getMessage() {
+			return message;
+		}
 
-	public String getContent() {
-		return content;
-	}
+		public void setMessage(String message) {
+			this.message = message;
+		}
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+		public String getName() {
+			return name;
+		}
 
-	public Date getSendTime() {
-		return sendTime;
-	}
+		public void setName(String name) {
+			this.name = name;
+		}
 
-	public void setSendTime(Date sendTime) {
-		this.sendTime = sendTime;
-	}
+		public int getUnReadCount() {
+			return unReadCount;
+		}
 
-	public Date getReadTime() {
-		return readTime;
-	}
+		public void setUnReadCount(int unReadCount) {
+			this.unReadCount = unReadCount;
+		}
 
-	public void setReadTime(Date readTime) {
-		this.readTime = readTime;
-	}
+		public int getSessionCount() {
+			return sessionCount;
+		}
 
-	public String getChatroom_id() {
-		return chatroom_id;
-	}
+		public void setSessionCount(int sessionCount) {
+			this.sessionCount = sessionCount;
+		}
 
-	public void setChatroom_id(String chatroom_id) {
-		this.chatroom_id = chatroom_id;
-	}
+		@Override
+		public String toString() {
+			return "MessageVO [id=" + id + ", roomId=" + roomId + ", message=" + message + ", name=" + name
+					+ ", userId=" + userId + ", unReadCount=" + unReadCount + ", sessionCount=" + sessionCount + "]";
+		}
 
-	public String getSender_id() {
-		return sender_id;
-	}
-
-	public void setSender_id(String sender_id) {
-		this.sender_id = sender_id;
-	}
-
-	public String getReceiver_id() {
-		return receiver_id;
-	}
-
-	public void setReceiver_id(String receiver_id) {
-		this.receiver_id = receiver_id;
-	}
-
-	public int getUnReadCount() {
-		return unReadCount;
-	}
-
-	public void setUnReadCount(int unReadCount) {
-		this.unReadCount = unReadCount;
-	}
-	
-	public static MessageVO convertMessage(String source) {
-		MessageVO message = new MessageVO();
-		Gson gson = new Gson();
-		message = gson.fromJson(source,  MessageVO.class);
-		return message;
-	}
 	
 }

@@ -9,12 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ina.message.VO.ChatSession;
 import com.ina.message.VO.UserVO;
 import com.ina.message.service.LoginService;
 
 @Controller 
 public class LoginController { 
-	
+	@Autowired
+	private ChatSession cSession;
 	@Autowired
 	private LoginService loginService;
 	
@@ -37,11 +39,13 @@ public class LoginController {
 		System.out.println(one);
 		if(one!=null) {//로그인 성공
 				
-			session.setAttribute("Name", one.getName()); //세션에 login이란 이름으로 User 객체를 저장한다.
-			session.setAttribute("ID", one.getId()); //세션에 login이란 이름으로 User 객체를 저장한다.
-			session.setAttribute("email", one.getEmail());
+			session.setAttribute("Name", one.getUsername()); //세션에 login이란 이름으로 User 객체를 저장한다.
+			session.setAttribute("ID", one.getUserid()); //세션에 login이란 이름으로 User 객체를 저장한다.
+//			session.setAttribute("email", one.getEmail());
 			session.setAttribute("login", one);
 				
+			// 현재 로그인 한 User 채팅 Session ArrayList에 추가.
+			cSession.addLoginUser((int)one.getUserid());
 			mav=new ModelAndView("redirect:/list");
 		}
 		else {
@@ -49,5 +53,9 @@ public class LoginController {
 		}
 		System.out.println("loginProcess controller end");
 		return mav;
+		
+		/* 채팅 */
+		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제.
+		//cSession.removeLoginUser(u.getEmail());
 	}
 }

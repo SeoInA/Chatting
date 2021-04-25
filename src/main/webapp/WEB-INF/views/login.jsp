@@ -29,10 +29,10 @@
             <div class="panel-body">
                 <form id="login-form" action="<%=request.getContextPath()%>/login/loginProcess" method="post" >
                     <div>
-                        <input type="text" class="form-control" name="nickName" placeholder="Username" autofocus>
+                        <input type="text" class="form-control" name="nick" placeholder="Username" autofocus>
                     </div>
                     <div>
-                        <input type="password" class="form-control" name="password" placeholder="Password">
+                        <input type="password" class="form-control" name="userpw" placeholder="Password">
                     </div>
                     <div>
                         <button type="submit" class="form-control btn btn-primary">로그인</button>

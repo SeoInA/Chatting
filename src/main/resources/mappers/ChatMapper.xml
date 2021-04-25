@@ -3,148 +3,67 @@
 
 <mapper namespace="com.ina.message.mappers.ChatMapper">
 
-<insert id = "createRoom">
-insert into chatroom (sender_id , receiver_id) 
-values(#{sender_id}, #{receiver_id})
+	<!-- <resultMap type="com.ina.message.VO.ChatRoomVO" id="chatRoomResultSet">
+		<id property="id" column="ROOM_ID" />
+		<result property="userEmail" column="USER_EMAIL" />
+		<result property="userName" column="USER_NAME" />		
+		<result property="userPic" column="USER_PIC" />
+		<result property="masterEmail" column="MASTER_EMAIL" />
+		<result property="masterName" column="MASTER_NAME" />
+		<result property="masterPic" column="MASTER_PIC" />
+	</resultMap>
 
-</insert>
+	<resultMap type="com.ina.message.VO.MessageVO" id="chatMessageResultSet">
+		<id property="messageId" column="MESSAGE_ID" />
+		<result property="roomId" column="ROOM_ID" />
+		<result property="message" column="MESSAGE_CONTENT" />
+		<result property="name" column="USER_NAME" />
+		<result property="email" column="USER_EMAIL" />
+		<result property="unReadCount" column="UNREAD_COUNT" />
+	</resultMap> -->
+	
+	<!-- 신규 채팅방일 때 채팅 방 생성 -->
+	<insert id="createChat" parameterType="com.ina.message.VO.ChatRoomVO">
+		insert into chatRoom(senderId,senderName,receiverId,receiverName) values(#{senderId}, #{senderName}, #{receiverId}, #{receiverName})
+	</insert>
 
-
-<select id ="isRoom" resultType = "ChatRoomVO">
-	select * from chatroom WHERE sender_id = #{sender_id} and receiver_id = #{receiver_id} 
-</select>
-
-<insert id = "insertMessage">
-insert into chat (sender , receiver, content, 
-chatroom_id, sender_id , receiver_id)
-values (#{sender}, #{receiver}, #{content} , #{chatroom_id} , #{sender_id}, #{receiver_id})
-</insert>
-
-<select id = "getPartner" resultType = "MessageVO">
-SELECT sender_id from chat where receiver_id = #{receiver_id}
-</select>
-
-<!-- <select id = "getProfile" resultType = "String">
-select user_profileImagePath from user WHERE id = #{user_id}
-</select> -->
-
-<select id = "getName" resultType = "String">
-select name from user where id = #{user_id}
-</select>
-
-<select id = "getMessageList" resultType = "MessageVO">
-SELECT m.* , user_name FROM chat m LEFT OUTER JOIN user u ON m.sender = u.id WHERE chatroom_id = #{chatroom_id}
-
-</select>
-
-<select id = "getRoomList" resultType = "ChatRoomVO">
-SELECT * FROM chatroom WHERE sender_id = #{sender_id}
-</select>
-<select id = "getRoomList2" resultType = "ChatRoomVO">
-SELECT * FROM chatroom WHERE receiver_id = #{receiver_id}
-</select>
-
-<!-- <select id = "getRecentMessage" resultType = "MessageVO">
-
-SELECT m.* , class_id FROM chat m LEFT OUTER JOIN CLASS c on m.CLASS_class_id = c.class_id 
-where CHATROOM_chatroom_id = #{CHATROOM_chatroom_id} order by message_id desc limit 1;
-
-</select>
- -->
-
-
-<update id ="updateReadTime">
-UPDATE chat SET readTime = NOW() WHERE receiver_id = #{receiver_id} AND readTime = sendTime AND sender = receiver_id AND sender_id = #{sender_id};
-</update>
-
-<!-- <update id ="updateReadTimeTutor">
-UPDATE chat SET readTime = NOW() WHERE TUTOR_USER_user_id = #{TUTOR_USER_user_id} AND CLASS_class_id = #{CLASS_class_id} AND message_readTime = message_sendTime and message_sender = USER_user_id and USER_user_id = #{USER_user_id};
-
-</update> -->
-
-
-<select id = "getUnReadCount" resultType = "int">
-
-SELECT count(*) FROM chat WHERE sender_id = #{sender_id} and receiver_id = #{receiver_id} AND readTime = sendTime AND sender = receiver_id;
-
-</select>
-
-<!-- <select id = "getUnReadCountTutor" resultType = "int">
-
-select count(*) from MESSAGE where TUTOR_USER_user_id =#{TUTOR_USER_user_id} and CLASS_class_id = #{CLASS_class_id} AND message_readTime = message_sendTime and message_sender = USER_user_id and USER_user_id = #{USER_user_id};
-
-</select> -->
-
-<select id = "getAllCount" resultType = "int">
-SELECT count(*) FROM chat WHERE (receiver_id = #{receiver_id} AND readTime = sendTime AND sender != #{sender_id}) OR (sender_id = #{sender_id} AND readTime = sendTime AND sender != #{sender_id}); 
-
-</select>
-
-<!-- version2 -->
-<select id="countByChatId" resultType="int">
-    	SELECT COUNT(*)
-    	FROM chatRoom
-    	WHERE sender_id = #{sender_id} AND
-    	receiver_id = #{receiver_id};
- </select>
- <select id="findByChatId" resultType="com.ina.message.VO.ChatRoomVO">
-    	SELECT *
-    	FROM chatRoom
-    	WHERE sender_id = #{sender_id} AND
-    	receiver_id = #{receiver_id};
- </select>
- <insert id="addChatRoom" parameterType="com.ina.message.VO.ChatRoomVO"
-    	useGeneratedKeys="true" keyProperty="id">
-    	INSERT INTO 
-    	chatRoom(sender_id, receiver_id, fileName, senderName, receiverName)
-    	VALUES (#{sender_id}, #{receiver_id}, #{fileName},#{senderName}, #{receiverName});
- </insert>
- <select id="getRoomId" resultType="int">
-    	SELECT ID
-    	FROM chatRoom
-    	WHERE sender_id = #{sender_id} AND
-    	receiver_id = #{receiver_id};
- </select>
- 
-  <update id="updateFileName">
-    	UPDATE chatRoom
-    	SET fileName = #{fileName}
-    	WHERE id = #{id};
-    </update>
-   
-    <update id="updateChatReadBuy">
-    	UPDATE chatRoom
-    	SET chatReadSend = #{chatReadBuy}
-    	WHERE id = #{id};
-    </update>
-
-    <update id="updateChatReadSell">
-    	UPDATE chatRoom
-    	SET chatReadRec = #{chatReadSell}
-    	WHERE id = #{id};
-    </update>
-   
-   <select id="getUnreadMessages" resultType="int">
-   		SELECT COUNT(id)
-   		FROM chatRoom
-   		WHERE (receiver_id = #{email} AND chatReadRec = 0) OR 
-   		(BUYERID = #{email} AND chatReadSend = 0);
-   </select>
-
-   <select id="getUnreadChatRoom" resultType="int">
-   		SELECT id
-   		FROM chatRoom
-   		WHERE (receiver_id = #{email} AND chatReadRec = 0) OR 
-   		(BUYERID = #{email} AND chatReadSend = 0);
-   </select>
-
-<!-- userList불러오기 -->
-<select id="userList" resultType="com.ina.message.VO.UserVO">
-	SELECT * FROM user WHERE isDelete=0;
-</select>
-
-<!-- id로 이름 가져오기 -->
-<select id="getNameByID" resultType="String">
-	SELECT name FROM user WHERE id=#{id}
-</select>
+	<select id="selectChatRoom" parameterType="string" resultType="com.ina.message.VO.ChatRoomVO">
+		SELECT * FROM chatRoom 
+		WHERE id = #{roomId} 
+	</select>
+	
+	<insert id="insertMessage" parameterType="com.ina.message.VO.MessageVO">
+		<if test="sessionCount == 1">
+		INSERT INTO message(roomId,message,name,userId,unReadCount) VALUES(#{roomId}, #{message}, #{name}, #{userId}, 1)
+		</if>
+		<if test="sessionCount == 2">
+		INSERT INTO message(roomId,message,name,userId,unReadCount) VALUES(#{roomId}, #{message}, #{name}, #{userId}, 0)
+		</if>
+	</insert>
+	
+	<select id="messageList" parameterType="string" resultType="com.ina.message.VO.MessageVO">
+		SELECT * FROM message
+		WHERE roomId = #{roomId}
+	</select>
+	
+	<select id="searchChatRoom" parameterType="com.ina.message.VO.ChatRoomVO" resultType="com.ina.message.VO.ChatRoomVO">
+		SELECT * FROM chatRoom
+		WHERE (senderId = #{senderId} AND receiverId = #{receiverId}) OR (senderId = #{receiverId} AND receiverId = #{senderId})
+	</select>
+	
+	<select id="chatRoomList" parameterType="string" resultType="com.ina.message.VO.ChatRoomVO">
+		SELECT * FROM chatRoom
+		WHERE senderId = #{userId} OR receiverId=#{userId}
+	</select>
+	
+	<select id="selectUnReadCount" parameterType="com.ina.message.VO.MessageVO" resultType="_int">
+		SELECT COUNT(*) FROM message
+		WHERE roomId = #{roomId} AND userId != #{userId} AND unReadCount = 1
+	</select>
+	
+	<update id="updateCount" parameterType="com.ina.message.VO.MessageVO">
+		UPDATE message
+		SET unReadCount = 0
+		WHERE roomId = #{roomId} AND userId != #{userId} AND unReadCount = 1
+	</update>
 </mapper>

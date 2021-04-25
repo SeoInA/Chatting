@@ -4,59 +4,46 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 public class UserVO {
-	private int id;
-	private String name;
-	private String email;
-	private String nickName;
-	private String password;
-	private int isDelete;
-	private Timestamp regDate;
+	private int userid;
+	private String username;
+	private String nick;
+	private String userpw;
+	
 	@Override
 	public String toString() {
-		return "UserVO [id=" + id + ", name=" + name + ", email=" + email + ", nickName=" + nickName + ", password="
-				+ password + ", isDelete=" + isDelete + ", regDate=" + regDate + "]";
+		return "UserVO [userid=" + userid + ", username=" + username + ", nick=" + nick + ", userpw=" + userpw + "]";
 	}
-	public int getId() {
-		return id;
+
+	public int getUserid() {
+		return userid;
 	}
-	public void setId(int id) {
-		this.id = id;
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
-	public String getName() {
-		return name;
+
+	public String getUsername() {
+		return username;
 	}
-	public void setName(String name) {
-		this.name = name;
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
-	public String getEmail() {
-		return email;
+
+	public String getNick() {
+		return nick;
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
-	public String getNickName() {
-		return nickName;
+
+	public String getUserpw() {
+		return userpw;
 	}
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
-	}
-	public Timestamp getRegDate() {
-		return regDate;
-	}
-	public void setRegDate(Timestamp regDate) {
-		this.regDate = regDate;
+
+	public void setUserpw(String userpw) {
+		this.userpw = userpw;
 	}
 	
 }
