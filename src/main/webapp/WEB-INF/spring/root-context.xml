@@ -25,7 +25,7 @@
 
 		<property name="url"
 
-			value="jdbc:mysql://localhost:3306/message?serverTimezone=Asia/Seoul&amp;useSSL=false"></property>
+			value="jdbc:mysql://localhost:3306/chat?serverTimezone=Asia/Seoul&amp;useSSL=false"></property>
 
 		<property name="username" value="root"></property>
 

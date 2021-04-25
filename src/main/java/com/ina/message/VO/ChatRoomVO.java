@@ -1,35 +1,69 @@
 package com.ina.message.VO;
 
-public class ChatRoomVO {
+public class ChatRoomVO{
 
+	private int id;
+	private int unReadCount;
+	private int senderId;
+	private String senderName;
+	private int receiverId;
+	private String receiverName;
 	
-	private String chatroom_id;
-	private String sender_id;
-	private String receiver_id;
-	
-	public String getChatroom_id() {
-		return chatroom_id;
-	}
-	public void setChatroom_id(String chatroom_id) {
-		this.chatroom_id = chatroom_id;
+	public ChatRoomVO() {
+		super();
 	}
 	
-	public String getSender_id() {
-		return sender_id;
+	public ChatRoomVO(int id, int senderId, String senderName,int receiverId,
+			String receiverName, int unReadCount) {
+		super();
+		this.id = id;
+		this.senderId = senderId;
+		this.senderName = senderName;
+		this.receiverId = receiverId;
+		this.receiverName = receiverName;
+		this.unReadCount = unReadCount;
 	}
-	public void setSender_id(String sender_id) {
-		this.sender_id = sender_id;
-	}
-	public String getReceiver_id() {
-		return receiver_id;
-	}
-	public void setReceiver_id(String receiver_id) {
-		this.receiver_id = receiver_id;
-	}
+	
 	@Override
 	public String toString() {
-		return "ChatRoomVO [chatroom_id=" + chatroom_id + ", sender_id=" + sender_id + ", receiver_id=" + receiver_id
-				+ "]";
+		return "ChatRoomVO [id=" + id + ", unReadCount=" + unReadCount + ", senderId=" + senderId + ", senderName="
+				+ senderName + ", receiverId=" + receiverId + ", receiverName=" + receiverName + "]";
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public int getUnReadCount() {
+		return unReadCount;
+	}
+	public void setUnReadCount(int unReadCount) {
+		this.unReadCount = unReadCount;
+	}
+	public int getSenderId() {
+		return senderId;
+	}
+	public void setSenderId(int senderId) {
+		this.senderId = senderId;
+	}
+	public String getSenderName() {
+		return senderName;
+	}
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
+	}
+	public int getReceiverId() {
+		return receiverId;
+	}
+	public void setReceiverId(int receiverId) {
+		this.receiverId = receiverId;
+	}
+	public String getReceiverName() {
+		return receiverName;
+	}
+	public void setReceiverName(String receiverName) {
+		this.receiverName = receiverName;
 	}
 	
 }
