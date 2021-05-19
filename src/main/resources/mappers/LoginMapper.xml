@@ -6,7 +6,7 @@
 <mapper namespace="com.ina.message.mappers.LoginMapper">
 
 	<!-- login -->
-    <select id="login" resultType="com.ina.message.VO.UserVO">
+    <select id="login" resultType="com.ina.login.UserVO">
     	select * from user where nick=#{userid} and userpw=#{userpw}
     </select>
     
@@ -17,11 +17,11 @@
     </select>
     
     <!-- UserInfo -->
-    <select id="getUserInfo" parameterType="int" resultType="com.ina.message.VO.UserVO">
+    <select id="getUserInfo" parameterType="int" resultType="com.ina.login.UserVO">
     	SELECT * FROM user where userid=#{id};
     </select>
     
-    <select id="userList" resultType="com.ina.message.VO.UserVO">
+    <select id="userList" resultType="com.ina.login.UserVO">
     	SELECT * FROM user;
     </select>
 </mapper>

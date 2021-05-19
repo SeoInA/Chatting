@@ -1,4 +1,4 @@
-package com.ina.message;
+package com.ina.login;
 
 import javax.servlet.http.HttpSession;
 
@@ -7,11 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model; 
 import org.springframework.web.bind.annotation.RequestMapping; 
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.ina.message.VO.ChatSession;
-import com.ina.message.VO.UserVO;
-import com.ina.message.service.LoginService;
+
 
 @Controller 
 public class LoginController { 
@@ -57,5 +57,13 @@ public class LoginController {
 		/* 채팅 */
 		// 로그아웃한 User를 채팅 Session ArrayList에서 삭제.
 		//cSession.removeLoginUser(u.getEmail());
+	}
+	
+	@RequestMapping(value="/logout")
+	public String logout(HttpSession session,SessionStatus sessionStatus) {
+		sessionStatus.setComplete();
+		session.invalidate(); //세션 삭제
+		
+		return "home";
 	}
 }

@@ -28,6 +28,9 @@
 </style>
 </head>
 <body>
+<div>
+	<p><a href="<%=request.getContextPath()%>/logout">로그아웃</a></p>
+</div>
 <main>
 <div id="headTitle"><h2>전산전자공학부 공지 </h2></div>
 
