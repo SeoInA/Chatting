@@ -1,4 +1,4 @@
-package com.ina.message.DAO;
+package com.ina.login;
 import java.util.List;
 import java.util.HashMap;
 import java.util.Map;
@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.ina.message.VO.UserVO;
 @Repository
 public class LoginDAO {
 	

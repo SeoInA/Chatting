@@ -1,4 +1,4 @@
-package com.ina.message.VO;
+package com.ina.login;
 
 import java.sql.Timestamp;
 import java.util.Date;

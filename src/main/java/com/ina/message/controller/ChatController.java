@@ -21,11 +21,11 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 import com.ina.message.VO.MessageVO;
+import com.ina.login.LoginService;
+import com.ina.login.UserVO;
 import com.ina.message.VO.ChatRoomVO;
-import com.ina.message.VO.UserVO;
 import com.ina.message.VO.ChatSession;
 import com.ina.message.service.ChatService;
-import com.ina.message.service.LoginService;
 
 @Controller
 public class ChatController {

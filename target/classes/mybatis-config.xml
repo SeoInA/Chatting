@@ -8,7 +8,7 @@
 	<typeAliases>
 		<typeAlias alias="ChatRoomVO" type="com.ina.message.VO.ChatRoomVO" />
 		<typeAlias alias="MessageVO" type="com.ina.message.VO.MessageVO" />
-		<typeAlias alias="UserVO" type="com.ina.message.VO.UserVO" />	
+		<typeAlias alias="UserVO" type="com.ina.login.UserVO" />	
 	</typeAliases>
 	
 </configuration>
